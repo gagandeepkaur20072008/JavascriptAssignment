@@ -1,1 +1,1 @@
-# JavascriptAssignment
+# Javascript Assignment by Gagandeep Kaur
