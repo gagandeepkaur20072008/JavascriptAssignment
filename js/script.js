@@ -1,6 +1,6 @@
 // Begin game once DOM loaded
 document.addEventListener("DOMContentLoaded", game);
-const DISTANCE = 34.5;
+const DISTANCE = 34.0;//34.5;
 
 //STEP 1 - Create puzzlePieces data structure.
 const puzzlePieces = {
@@ -25,41 +25,84 @@ const puzzlePieces = {
   4: {
     tileNumber: 4,
     position: 4,
-    top: DISTANCE,
-    left: 0
+    top: 0,
+    left: DISTANCE * 3
   },
   5: {
     tileNumber: 5,
     position: 5,
-    top: DISTANCE,
-    left: DISTANCE
+    top: DISTANCE * 1,
+    left: 0
   },
   6: {
     tileNumber: 6,
     position: 6,
     top: DISTANCE,
-    left: DISTANCE * 2
+    left: DISTANCE * 1
   },
   7: {
     tileNumber: 7,
     position: 7,
-    top: DISTANCE * 2,
-    left: 0
+    top: DISTANCE ,
+    left: DISTANCE * 2
   },
   8: {
     tileNumber: 8,
     position: 8,
-    top: DISTANCE * 2,
-    left: DISTANCE
+    top: DISTANCE ,
+    left: DISTANCE *3
   },
-  empty: {
+  
+  9: {
+    tileNumber: 9,
     position: 9,
     top: DISTANCE * 2,
+    left: 0
+  },
+  10: {
+    tileNumber: 10,
+    position: 10,
+    top: DISTANCE * 2,
+    left: DISTANCE 
+  },
+  11: {
+    tileNumber: 11,
+    position: 11,
+    top: DISTANCE * 2,
     left: DISTANCE * 2
+  },
+  12: {
+    tileNumber: 12,
+    position: 12,
+    top: DISTANCE * 2,
+    left: DISTANCE *3
+  },
+  13: {
+    tileNumber: 13,
+    position: 13,
+    top: DISTANCE * 3,
+    left: 0
+  },
+  14: {
+    tileNumber: 14,
+    position: 14,
+    top: DISTANCE * 3,
+    left: DISTANCE 
+  },
+  15: {
+    tileNumber: 15,
+    position: 15,
+    top: DISTANCE * 3,
+    left: DISTANCE * 2
+  },
+  empty: {
+    position: 16,
+    top: DISTANCE * 3,
+    left: DISTANCE * 3
   }
 }
 
-const blankSpace = { x: 300, y: 300, position: 16, top: baseDistance * 3, left: baseDistance * 3 };
+const blankSpace = { x: 300, y: 300, position: 16, top: DISTANCE * 3, left: DISTANCE * 3 };
 
 // I'm structuring my program sort of like how Vue does it - all in my puzzle object below.
 const puzzle = {
@@ -121,15 +164,23 @@ function game() {
 
   // Movement map
   function movementMap(position) {
-    if (position == 9) return [6, 8];
-    if (position == 8) return [5, 7, 9];
-    if (position == 7) return [4, 8];
-    if (position == 6) return [3, 5, 9];
-    if (position == 5) return [2, 4, 6, 8];
-    if (position == 4) return [1, 5, 7];
-    if (position == 3) return [2, 6];
-    if (position == 2) return [1, 3, 5];
-    if (position == 1) return [2, 4];
+    
+    if (position == 16) return [12,15];
+    if (position == 15) return [11,14,16];
+    if (position == 14) return [10,13,15];
+    if (position == 13) return [9,14];
+    if (position == 12) return [8,11,16];
+    if (position == 11) return [7,10,12,15];
+    if (position == 10) return [6,9,11,14];
+    if (position == 9) return [5,10,3];
+    if (position == 8) return [4,7,12];
+    if (position == 7) return [3,6,8,11];
+    if (position == 6) return [2,5,7,10];
+    if (position == 5) return [1,6,9];
+    if (position == 4) return [3,8];
+    if (position == 3) return [2, 4,7];
+    if (position == 2) return [1, 3, 6];
+    if (position == 1) return [2, 5];
   }
 
   // Board setup according to the puzzlePieces
@@ -161,7 +212,7 @@ function game() {
     moveTile(event.target);
 
     if (checkSolution()) {
-      console.log("You win!");
+      alert("You win!");
     }
   }
 
@@ -229,7 +280,7 @@ function game() {
 
   // Returns true/false based on if the puzzle has been solved
   function checkSolution() {
-    if (puzzlePieces.empty.position !== 9) return false;
+    if (puzzlePieces.empty.position !== 16) return false;
 
     for (var key in puzzlePieces) {
       if ((key != 1) && (key != "empty")) {
@@ -275,7 +326,7 @@ function game() {
     var shuffleTiles = movementMap(emptyPosition);
     var tilePosition = shuffleTiles[Math.floor(Math.floor(Math.random()*shuffleTiles.length))];
     var locatedTile;
-    for(var i = 1; i <= 8; i++) {
+    for(var i = 1; i <= 15; i++) {
       if (puzzlePieces[i].position == tilePosition) {
         var locatedTileNumber = puzzlePieces[i].tileNumber;
         locatedTile = tiles[locatedTileNumber-1];
