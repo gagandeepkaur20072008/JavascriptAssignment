@@ -8,10 +8,10 @@ body {
 
 .sliding-puzzle-figure {
   margin: auto;
-  height: 650px;
-  width: 650px;
-  max-height: 70vh;
-  max-width: 70vh;
+  height: 850px;
+  width: 850px;
+  max-height: 50vh;
+  max-width: 50vh;
   padding-bottom: 50vh;
   padding-top: 10vh; }
   .sliding-puzzle-figure a {
@@ -39,8 +39,8 @@ body {
       color: #1F1F1F;
       border-radius: 10px;
       cursor: pointer;
-      width: 31%;
-      height: 31%;
+      width: 19%;
+      height: 19%;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -53,7 +53,7 @@ body {
       .sliding-puzzle-figure .sliding-puzzle .tile.error {
         background-color: #F0867D; }
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: 1050px) {
   .sliding-puzzle-figure {
     width: 90vw;
     height: 90vw;
